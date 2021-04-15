@@ -1,0 +1,15 @@
+<h1>Create New Task</h1>
+<%= form({action: taskCreatePath(), method: "PUT"}) { %>
+    <div class="row">
+        <div class="col-md-6">
+          <%= f.InputTag({name:"Name", value: task.Name, label: "Name"}) %>
+        </div>
+    
+        <div class="col-md-6">
+            <%= f.InputTag({name:"Description", value: task.Description, label: "Description"}) %>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-info" value="Create task">Create task</button>
+<% } %>
+<br>
+<%= linkTo(rootPath(), {body: "Back", class: "btn btn-primary"})%>

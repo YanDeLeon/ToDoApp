@@ -1,0 +1,7 @@
+create_table("tasks") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("name", "string", {})
+  	t.Column("description", "string", {})
+  	t.Column("finished", "bool", {"default": false})
+	t.Timestamps()
+}
