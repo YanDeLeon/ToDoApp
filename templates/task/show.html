@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col">
+        <h1>Task Details</h1>
+        <h2>Name: <%= task.Name %></h2>
+        <p>Description: <%= task.Description %></p>
+        <%= if (task.Finished) { %>
+            <p>Status: <span class="success">Completed</span></p>
+        <% } else { %>
+            <p>Status: <span class="warning">Completed</span></p>
+        <% } %>
+    </div>
+</div>
+
+<%= linkTo(rootPath(), {body: "Back", class: "btn btn-primary"})%>

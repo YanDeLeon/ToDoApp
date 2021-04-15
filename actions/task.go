@@ -6,6 +6,7 @@ import (
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop/v5"
+	"github.com/gofrs/uuid"
 	"github.com/pkg/errors"
 )
 
@@ -42,4 +43,24 @@ func Create(c buffalo.Context) error {
 	}
 
 	return c.Redirect(http.StatusSeeOther, "rootPath()")
+}
+
+func Show(c buffalo.Context) error {
+	id, err := uuid.FromString(c.Param("id"))
+
+	if err != nil {
+		return errors.WithStack(errors.Wrap(err, "loading id error"))
+	}
+
+	tx := c.Value("tx").(*pop.Connection)
+
+	task := models.Task{}
+
+	if err := tx.Where("id = ?", id).First(&task); err != nil {
+		return errors.WithStack(errors.Wrap(err, "finding task error"))
+	}
+
+	c.Set("task", task)
+
+	return c.Render(http.StatusOK, r.HTML("task/show.html"))
 }
