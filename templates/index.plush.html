@@ -44,6 +44,13 @@
                   Pending
                   <% } %>
               </td>
+              <td>
+                  <%= if (t.Finished) { %>
+                    <%= linkTo(newTaskPath(), {body: "Mark as pending", class: "btn btn-danger"})%>
+                  <% } else { %>
+                    <%= linkTo(newTaskPath(), {body: "Mark as completed", class: "btn btn-success"})%>
+                  <% } %>
+              </td>
             </tr>
           <% } %>
         </tbody>

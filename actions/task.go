@@ -33,17 +33,9 @@ func Create(c buffalo.Context) error {
 	task := models.Task{}
 	tx := c.Value("tx").(*pop.Connection)
 
-	form := struct {
-		Name        string
-		Description string
-	}{}
-
-	if err := c.Bind(&form); err != nil {
+	if err := c.Bind(&task); err != nil {
 		return errors.WithStack(errors.Wrap(err, "add task bind error"))
 	}
-
-	task.Name = form.Name
-	task.Description = form.Description
 
 	if err := tx.Eager().Create(&task); err != nil {
 		return errors.WithStack(errors.Wrap(err, "create task error"))
