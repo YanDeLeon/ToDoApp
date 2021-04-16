@@ -63,6 +63,24 @@ func Show(c buffalo.Context) error {
 	return c.Render(http.StatusOK, r.HTML("task/show.html"))
 }
 
+func Edit(c buffalo.Context) error {
+	id, err := uuid.FromString(c.Param("id"))
+
+	if err != nil {
+		return errors.WithStack(errors.Wrap(err, "loading id error"))
+	}
+
+	task, err := findTask(c, id)
+
+	if err != nil {
+		return errors.WithStack(errors.Wrap(err, "finding task error"))
+	}
+
+	c.Set("task", task)
+
+	return c.Render(http.StatusOK, r.HTML("task/edit.html"))
+}
+
 func Delete(c buffalo.Context) error {
 	id, err := uuid.FromString(c.Param("id"))
 
@@ -80,6 +98,32 @@ func Delete(c buffalo.Context) error {
 
 	if err := tx.Destroy(&task); err != nil {
 		return errors.WithStack(errors.Wrap(err, "destroy task error"))
+	}
+
+	return c.Redirect(http.StatusSeeOther, "rootPath()")
+}
+
+func Update(c buffalo.Context) error {
+	id, err := uuid.FromString(c.Param("id"))
+
+	if err != nil {
+		return errors.WithStack(errors.Wrap(err, "loading id error"))
+	}
+
+	tx := c.Value("tx").(*pop.Connection)
+
+	task, err := findTask(c, id)
+
+	if err != nil {
+		return errors.WithStack(errors.Wrap(err, "finding task error"))
+	}
+
+	if err := c.Bind(&task); err != nil {
+		return errors.WithStack(errors.Wrap(err, "add task bind error"))
+	}
+
+	if err := tx.Eager().Update(&task); err != nil {
+		return errors.WithStack(errors.Wrap(err, "create task error"))
 	}
 
 	return c.Redirect(http.StatusSeeOther, "rootPath()")
