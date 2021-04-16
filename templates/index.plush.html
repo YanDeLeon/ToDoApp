@@ -39,16 +39,16 @@
               </td>
               <td>
                 <%= if (t.Finished) { %>
-                  Finished
+                  <p class="text-success">Finished</p>
                   <% } else { %>
-                  Pending
+                  <p class="text-danger">Pending</p> 
                   <% } %>
               </td>
               <td>
                   <%= if (t.Finished) { %>
-                    <%= linkTo(newTaskPath(), {body: "Mark as pending", class: "btn btn-danger"})%>
+                    <a class="btn btn-primary" href="<%= taskUpdateStatusPath({id: t.ID}) %>" data-method="PUT">Mark as Pending</a>
                   <% } else { %>
-                    <%= linkTo(newTaskPath(), {body: "Mark as completed", class: "btn btn-warning"})%>
+                    <a class="btn btn-success" href="<%= taskUpdateStatusPath({id: t.ID}) %>" data-method="PUT">Mark as Completed</a>
                   <% } %>
               </td>
             </tr>

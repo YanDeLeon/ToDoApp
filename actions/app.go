@@ -66,6 +66,7 @@ func App() *buffalo.App {
 		app.GET("/task/{id}/show", Show)
 		app.GET("/task/{id}/edit", Edit)
 		app.PUT("/task/{id}/update", Update)
+		app.PUT("/task/{id}/update-status/", ChangeStatus)
 		app.DELETE("/task/{id}/delete/", Delete)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}

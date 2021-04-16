@@ -129,6 +129,34 @@ func Update(c buffalo.Context) error {
 	return c.Redirect(http.StatusSeeOther, "rootPath()")
 }
 
+func ChangeStatus(c buffalo.Context) error {
+	id, err := uuid.FromString(c.Param("id"))
+
+	if err != nil {
+		return errors.WithStack(errors.Wrap(err, "loading id error"))
+	}
+
+	tx := c.Value("tx").(*pop.Connection)
+
+	task, err := findTask(c, id)
+
+	if err != nil {
+		return errors.WithStack(errors.Wrap(err, "finding task error"))
+	}
+
+	if task.Finished {
+		task.Finished = false
+	} else {
+		task.Finished = true
+	}
+
+	if err := tx.Eager().Update(&task); err != nil {
+		return errors.WithStack(errors.Wrap(err, "create task error"))
+	}
+
+	return c.Redirect(http.StatusSeeOther, "rootPath()")
+}
+
 func findTask(c buffalo.Context, id uuid.UUID) (models.Task, error) {
 
 	tx := c.Value("tx").(*pop.Connection)
