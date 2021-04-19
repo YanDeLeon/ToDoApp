@@ -144,11 +144,7 @@ func ChangeStatus(c buffalo.Context) error {
 		return errors.WithStack(errors.Wrap(err, "finding task error"))
 	}
 
-	if task.Finished {
-		task.Finished = false
-	} else {
-		task.Finished = true
-	}
+	task.Finished = !task.Finished
 
 	if err := tx.Eager().Update(&task); err != nil {
 		return errors.WithStack(errors.Wrap(err, "create task error"))
