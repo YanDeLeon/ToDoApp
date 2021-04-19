@@ -12,5 +12,4 @@ func (ms *ModelSuite) Test_Task() {
 	}
 
 	ms.NoError(ms.DB.Create(&newTask))
-
 }
