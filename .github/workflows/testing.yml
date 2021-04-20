@@ -27,4 +27,5 @@ jobs:
 
     - name: Test
       run: |
-        go test --race ./...
+        go install github.com/wawandco/oxpecker/cmd/ox@v1.2.3
+        ox test
