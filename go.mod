@@ -18,13 +18,11 @@ require (
 	github.com/gobuffalo/suite/v3 v3.0.2
 	github.com/gobuffalo/validate/v3 v3.1.0
 	github.com/gofrs/uuid v3.3.0+incompatible
-	github.com/google/uuid v1.2.0
 	github.com/lib/pq v1.8.0 // indirect
 	github.com/markbates/grift v1.5.0
 	github.com/pkg/errors v0.9.1
 	github.com/rogpeppe/go-internal v1.6.1 // indirect
 	github.com/unrolled/secure v1.0.7
-	github.com/wawandco/oxpecker v1.5.2 // indirect
 	golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897 // indirect
 	golang.org/x/net v0.0.0-20201021035429-f5854403a974 // indirect
 	golang.org/x/sync v0.0.0-20201020160332-67f06af15bc9 // indirect
