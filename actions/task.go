@@ -105,6 +105,7 @@ func Delete(c buffalo.Context) error {
 	return c.Redirect(http.StatusSeeOther, "rootPath()")
 }
 
+//Update updates xD
 func Update(c buffalo.Context) error {
 	id, err := uuid.FromString(c.Param("id"))
 
