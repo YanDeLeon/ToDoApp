@@ -21,8 +21,10 @@ func New(c buffalo.Context) error {
 func List(c buffalo.Context) error {
 	tasks := models.Tasks{}
 	tx := c.Value("tx").(*pop.Connection)
+	vQ := tx.PaginateFromParams(c.Params())
+	vQ.Order("created_at asc")
 
-	if err := tx.All(&tasks); err != nil {
+	if err := vQ.All(&tasks); err != nil {
 		return err
 	}
 
@@ -38,7 +40,7 @@ func Create(c buffalo.Context) error {
 		return errors.WithStack(errors.Wrap(err, "add task bind error"))
 	}
 
-	if err := tx.Eager().Create(&task); err != nil {
+	if err := tx.Create(&task); err != nil {
 		return errors.WithStack(errors.Wrap(err, "create task error"))
 	}
 
@@ -122,7 +124,7 @@ func Update(c buffalo.Context) error {
 		return errors.WithStack(errors.Wrap(err, "add task bind error"))
 	}
 
-	if err := tx.Eager().Update(&task); err != nil {
+	if err := tx.Update(&task); err != nil {
 		return errors.WithStack(errors.Wrap(err, "create task error"))
 	}
 
@@ -146,7 +148,7 @@ func ChangeStatus(c buffalo.Context) error {
 
 	task.Finished = !task.Finished
 
-	if err := tx.Eager().Update(&task); err != nil {
+	if err := tx.Update(&task); err != nil {
 		return errors.WithStack(errors.Wrap(err, "create task error"))
 	}
 
@@ -159,7 +161,7 @@ func findTask(c buffalo.Context, id uuid.UUID) (models.Task, error) {
 
 	task := models.Task{}
 
-	if err := tx.Where("id = ?", id).First(&task); err != nil {
+	if err := tx.Find(&task, id); err != nil {
 		return task, err
 	}
 

@@ -2,7 +2,7 @@
 <%= form({action: taskCreatePath(), method: "PUT"}) { %>
     <div class="row">
         <div class="col-md-6">
-          <%= f.InputTag({name:"Name", value: task.Name, label: "Name"}) %>
+          <%= f.InputTag({name:"Name", value: task.Name, label: "Name", required: true}) %>
         </div>
     
         <div class="col-md-6">

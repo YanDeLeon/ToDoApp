@@ -1,12 +1,15 @@
 <h1>Edit Task:  <%= task.Name %></h1>
-<%= form({action: taskUpdatePath({id: task.ID}), method: "PUT"}) { %>
+<%= form_for( task,{action: taskUpdatePath({id: task.ID}), method: "PUT"}) { %>
     <div class="row">
         <div class="col-md-6">
-          <%= f.InputTag({name:"Name", value: task.Name, label: "New Name"}) %>
+          <%= f.InputTag("Name",{required: true}) %>
         </div>
     
         <div class="col-md-6">
-            <%= f.InputTag({name:"Description", value: task.Description, label: "New Description"}) %>
+            <%= f.InputTag("Description",{label: "New Description"}) %>
+        </div>
+        <div class="col-md-6">
+            <%= f.CheckboxTag("Finished",{value: task.Finished, unchecked: false}) %>
         </div>
     </div>
     <button type="submit" class="btn btn-info" value="Create task">Save Changes</button>
