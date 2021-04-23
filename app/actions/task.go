@@ -2,7 +2,7 @@ package actions
 
 import (
 	"net/http"
-	"todoapp/models"
+	"todoapp/app/models"
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop/v5"

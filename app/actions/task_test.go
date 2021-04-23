@@ -3,7 +3,7 @@ package actions
 import (
 	"net/http"
 	"net/url"
-	"todoapp/models"
+	"todoapp/app/models"
 
 	"github.com/gofrs/uuid"
 )

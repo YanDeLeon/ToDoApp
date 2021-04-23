@@ -12,16 +12,16 @@ const configurator = {
     var entries = {
       application: [
         './node_modules/jquery-ujs/src/rails.js',
-        './assets/css/application.scss',
+        './app/assets/css/application.scss',
       ],
     }
 
-    Glob.sync("./assets/*/*.*").forEach((entry) => {
-      if (entry === './assets/css/application.scss') {
+    Glob.sync("./app/assets/*/*.*").forEach((entry) => {
+      if (entry === '.app/assets/css/application.scss') {
         return
       }
 
-      let key = entry.replace(/(\.\/assets\/(src|js|css|go)\/)|\.(ts|js|s[ac]ss|go)/g, '')
+      let key = entry.replace(/app(\.\/assets\/(src|js|css|go)\/)|\.(ts|js|s[ac]ss|go)/g, '')
       if(key.startsWith("_") || (/(ts|js|s[ac]ss|go)$/i).test(entry) == false) {
         return
       }
@@ -40,7 +40,7 @@ const configurator = {
     var plugins = [
       new Webpack.ProvidePlugin({$: "jquery",jQuery: "jquery"}),
       new MiniCssExtractPlugin({filename: "[name].[contenthash].css"}),
-      new CopyWebpackPlugin([{from: "./assets",to: ""}], {copyUnmodified: true,ignore: ["css/**", "js/**", "src/**"] }),
+      new CopyWebpackPlugin([{from: "./app/assets",to: ""}], {copyUnmodified: true,ignore: ["css/**", "js/**", "src/**"] }),
       new Webpack.LoaderOptionsPlugin({minimize: true,debug: false}),
       new ManifestPlugin({fileName: "manifest.json"}),
       new CleanObsoleteChunks()

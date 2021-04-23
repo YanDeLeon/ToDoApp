@@ -19,7 +19,7 @@ require (
 	github.com/gobuffalo/validate/v3 v3.1.0
 	github.com/gofrs/uuid v3.3.0+incompatible
 	github.com/lib/pq v1.8.0 // indirect
-	github.com/markbates/grift v1.5.0
+	github.com/paganotoni/fsbox v1.1.2
 	github.com/pkg/errors v0.9.1
 	github.com/rogpeppe/go-internal v1.6.1 // indirect
 	github.com/unrolled/secure v1.0.7
