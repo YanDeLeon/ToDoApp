@@ -39,6 +39,9 @@ jobs:
         DATABASE_URL: "postgres://postgres:postgres@127.0.0.1:${{ job.services.postgres.ports[5432] }}/todoapp_test?sslmode=disable"
         GO_ENV: test
       run: |
+        curl -OL https://github.com/gobuffalo/buffalo/releases/download/v0.16.23/buffalo_0.16.23_Darwin_x86_64.tar.gz
+        tar -xvzf buffalo_0.16.23_Darwin_x86_64.tar.gz
+        mv buffalo ~/bin/buffalo
         buffalo test ./...
         
 
