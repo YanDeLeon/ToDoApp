@@ -1,0 +1,19 @@
+name: Linters
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    
+jobs:
+
+  HTML:
+    name: HTML Linting (Milo)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Linter (Milo)
+        run: |
+          curl -sf https://gobinaries.com/wawandco/milo/cmd/milo@v0.5.10 | sh
+          milo version
+          milo review .
