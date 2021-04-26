@@ -41,9 +41,3 @@ jobs:
       run: |
         go get -u -v github.com/gobuffalo/buffalo/buffalo
         buffalo test ./...
-        
-
-    - name: Milo
-      run: |
-        curl -sf https://gobinaries.com/wawandco/milo/cmd/milo | sh
-        milo review ./templates
