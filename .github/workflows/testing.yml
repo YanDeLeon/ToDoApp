@@ -46,4 +46,4 @@ jobs:
     - name: Milo
       run: |
         curl -sf https://gobinaries.com/wawandco/milo/cmd/milo | sh
-        milo review todoapp/templates
+        milo review ./templates
