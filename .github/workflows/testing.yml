@@ -29,3 +29,8 @@ jobs:
       run: |
         go install github.com/wawandco/oxpecker/cmd/ox@v1.5.2
         ox test
+
+    - name: Milo
+      run: |
+        curl -sf https://gobinaries.com/wawandco/milo/cmd/milo | sh
+        milo review todoapp/templates
